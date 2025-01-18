@@ -31,9 +31,9 @@ app.post('/readrecipelist', homeController.readRecipeList);
 app.post('/deleterecipe', homeController.deleteRecipe);
 app.post('/updaterecipe', homeController.updateRecipe);
 app.post('/writeplcdata', plcController.writePLCData);
-app.post('/writemutilplcdata', plcController.writeMultiplePLCData);
+//app.post('/writemutilplcdata', plcController.writeMultiplePLCData);
 app.post('/readplcdata', plcController.readPLCData);
-app.post('/readPLCValueByTag', plcController.readPLCValueByTag);
+//app.post('/readPLCValueByTag', plcController.readPLCValueByTag);
 
 app.get('/mainpage', (req, res) => {
     res.render('mainpage'); // Kết xuất file mainpage.ejs

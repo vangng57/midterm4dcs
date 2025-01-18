@@ -38,15 +38,31 @@
             
                 <!-- Hình van -->
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 44.2%;">
+                <div id="valve_1_status" class="status-circle" style="top: 49%; left: 40%;"></div>
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 52%;">
+                <div id="valve_2_status" class="status-circle" style="top: 49%; left: 48%;"></div>
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 22.6%;">
+                <div id="valve_3_status" class="status-circle" style="top: 49%; left: 18%;"></div>
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 33%; left: 29.4%;">
+                <div id="valve_4_status" class="status-circle" style="top: 31%; left: 25%;"></div>
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 33%; left: 22.6%;">
+                <div id="valve_5_status" class="status-circle" style="top: 31%; left: 18%;"></div>
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 33%; left: 15.8%;">
+                <div id="valve_6_status" class="status-circle" style="top: 31%; left: 11%;"></div>
+                <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 85%; left: 44.2%;">
+                <div id="valve_7_status" class="status-circle" style="top: 83%; left: 40%;"></div>
                 <img src="/images/MotorL.png" alt="Valve" class="motor-image" style="top: 2%; left: 8%;">
+                <div id="valve_8_status" class="status-circle" style="top: 0.5%; left: 3%;"></div>
                 <img src="/images/MotorL.png" alt="Valve" class="motor-image" style="top: 7%; left: 8%;">
+                <div id="valve_9_status" class="status-circle" style="top: 5.5%; left: 3%;"></div>
+                <img src="/images/MotorL.png" alt="Valve" class="motor-image" style="top: 70%; left: 35%;">
+                <div id="valve_10_status" class="status-circle" style="top: 68.5%; left: 30%;"></div>
+                <img src="/images/MotorL.png" alt="Valve" class="motor-image" style="top: 95%; left: 40%;">
+                <div id="valve_11_status" class="status-circle" style="top: 93.5%; left: 35%;"></div>
                 <img src="/images/MotorR.png" alt="Valve" class="motor-image" style="top: 2%; left: 90%;">
+                <div id="valve_12_status" class="status-circle" style="top: 0.5%; left: 93%;"></div>
                 <img src="/images/MotorR.png" alt="Valve" class="motor-image" style="top: 7%; left: 90%;">
+                <div id="valve_13_status" class="status-circle" style="top: 5.5%; left: 93%;"></div>
                 
                 <div id="scale-left" class="scale-value" style="top: 30%; left: 45%;">0.000</div>
                 <div id="scale-right" class="scale-value" style="top: 30%; left: 52.7%;">0.000</div>
@@ -226,19 +242,19 @@
 
             // Danh sách các nút và tag PLC tương ứng
             const buttonTasks = [
-                { name: "Cement Screw", tag: "Cement_Screw" },
-                { name: "Fly Ash Screw", tag: "Flyash_Screw" },
-                { name: "Sand Screw", tag: "Sand_Screw" },
-                { name: "Mineral Screw", tag: "Mineral_Screw" },
-                { name: "Mixer", tag: "Mixer" },
-                { name: "Conveyor Chute", tag: "Conveyor_Chute" },
-                { name: "Hopper Valve PG 1", tag: "Hopper_PG1" },
-                { name: "Hopper Valve PG 2", tag: "Hopper_PG2" },
-                { name: "Hopper Valve PG 3", tag: "Hopper_PG3" },
-                { name: "PG Scale Valve", tag: "PG_Scale_Valve" },
-                { name: "Sand Scale Valve", tag: "Sand_Scale_Valve" },
-                { name: "Mineral Ash Valve", tag: "Mineral_Ash_Valve" },
-                { name: "Mixer Valve Open", tag: "Mixer_Valve_Open" },
+                { name: "Cement Screw", tag: "Cement_Screw", id: "valve_8_status" },
+                { name: "Fly Ash Screw", tag: "Flyash_Screw", id: "valve_13_status" },
+                { name: "Sand Screw", tag: "Sand_Screw", id: "valve_9_status" },
+                { name: "Mineral Screw", tag: "Mineral_Screw", id: "valve_12_status" },
+                { name: "Mixer", tag: "Mixer", id: "valve_10_status" },
+                { name: "Conveyor Chute", tag: "Conveyor_Chute", id: "valve_11_status" },
+                { name: "Hopper Valve PG 1", tag: "Hopper_PG1", id: "valve_6_status" },
+                { name: "Hopper Valve PG 2", tag: "Hopper_PG2", id: "valve_5_status" },
+                { name: "Hopper Valve PG 3", tag: "Hopper_PG3", id: "valve_4_status" },
+                { name: "PG Scale Valve", tag: "PG_Scale_Valve", id: "valve_3_status" },
+                { name: "Sand Scale Valve", tag: "Sand_Scale_Valve", id: "valve_1_status" },
+                { name: "Mineral Ash Valve", tag: "Mineral_Ash_Valve", id: "valve_2_status" },
+                { name: "Mixer Valve Open", tag: "Mixer_Valve_Open", id: "valve_7_status" },
                 { name: "Mixer Valve Close", tag: "Mixer_Valve_Close" },
                 { name: "Sand Valve Vibrator", tag: "Sand_Valve_Vibrator" },
                 { name: "PG Ash Valve Vibrator", tag: "PG_Ash_Valve_Vibrator" }
@@ -534,13 +550,24 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.message); // Hiển thị thông báo phản hồi
+                //alert(data.message); // Hiển thị thông báo phản hồi
+                console.log(data.message);
             })
             .catch(err => {
                 console.error('Error while writting data:', err);
             });
         }
-
+        function updateColer(circle_status){
+            for (id in circle_status){
+                const valveElement = document.getElementById('valve_' + (parseInt(id) + 1) + '_status');
+                if (status == true){
+                    valveElement.style.backgroundColor = 'green';                
+                } else {
+                    valveElement.style.backgroundColor = 'red';
+                }
+            }
+            
+        }
         function updateActualValues() {
             // Các tag cần đọc
             const tags = {
@@ -552,7 +579,7 @@
                 additive2: "Additive2_Value",
                 additive3: "Additive3_Value"
             };
-            fetch('/readPLCValueByTag', {
+            fetch('/readplcdata', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             })
@@ -574,6 +601,15 @@
                     cell_additive2.textContent = parseFloat(data.values["Additive2_Value"]).toFixed(1);
                     const cell_additive3 = document.getElementById("actual-additive3");
                     cell_additive3.textContent = parseFloat(data.values["Additive3_Value"]).toFixed(1);
+
+                    const circle_status = [
+                        valve_1_status = data.values["Sand_Scale_Valve"], valve_2_status = data.values["Mineral_Ash_Valve"], valve_3_status = data.values["PG_Scale_Valve"],
+                        valve_4_status = data.values["Hopper_PG3"], valve_5_status = data.values["Hopper_PG2"], valve_6_status = data.values["Hopper_PG1"],
+                        valve_7_status = data.values["Mixer_Valve_Open"], valve_8_status = data.values["Cement_Screw"], valve_9_status = data.values["Sand_Screw"],
+                        valve_10_status = data.values["Mixer"], valve_11_status = data.values["Conveyor_Chute"], valve_12_status = data.values["Mineral_Screw"],
+                        valve_13_status = data.values["Flyash_Screw"]
+                    ]
+                    updateColer(circle_status);
                 } else {
                     console.error(`Lỗi khi đọc giá trị từ PLC: `, data.error);
                 }
@@ -582,41 +618,64 @@
         }
 
         // Gọi hàm mỗi giây để cập nhật bảng
-        setInterval(updateActualValues, 5000);
+        setInterval(updateActualValues, 1000);
 
         function start() {
-            // Lấy giá trị từ bảng "Công thức hiện tại"
-            const total_weight = parseFloat(document.getElementById('total_weight').value) || 0;
-            const batch_ref = parseFloat(document.getElementById('batch_number').value) || 0;
-            const cement_ref = parseFloat(document.getElementById('cement').value) || 0;
-            const sand_ref = parseFloat(document.getElementById('sand').value) || 0;
-            const mineral_ref = parseFloat(document.getElementById('mineral').value) || 0;
-            const flyash_ref = parseFloat(document.getElementById('flyash').value) || 0;
-            const additive1_ref = parseFloat(document.getElementById('additive1').value) || 0;
-            const additive2_ref = parseFloat(document.getElementById('additive2').value) || 0;
-            const additive3_ref = parseFloat(document.getElementById('additive3').value) || 0;
+            try {
+                // Lấy giá trị từ bảng "Công thức hiện tại"
+                const total_weight = parseFloat(document.getElementById('total_weight').value) || 0;
+                const batch_ref = parseFloat(document.getElementById('batch_number').value) || 0;
+                const cement_ref = parseFloat(document.getElementById('cement').value) || 0;
+                const sand_ref = parseFloat(document.getElementById('sand').value) || 0;
+                const mineral_ref = parseFloat(document.getElementById('mineral').value) || 0;
+                const flyash_ref = parseFloat(document.getElementById('flyash').value) || 0;
+                const additive1_ref = parseFloat(document.getElementById('additive1').value) || 0;
+                const additive2_ref = parseFloat(document.getElementById('additive2').value) || 0;
+                const additive3_ref = parseFloat(document.getElementById('additive3').value) || 0;
 
-            tag = ['Total_Weight','Batch_ref','Cement_ref','Sand_ref','Mineral_ref','Flyash_ref','PG01_ref','PG02_ref','PG03_ref','Start','Stop'];
-            value = [total_weight,batch_ref,cement_ref,sand_ref,mineral_ref,flyash_ref,additive1_ref,additive2_ref,additive3_ref,true,false];
-            
-            fetch('/writemutilplcdata', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: tag, value: value }) // Sử dụng tag PLC
-            })
-            .then(response => response.json())
-            .then(data => {
-                logMessage("System started: " + data.message);
-                 // Thay đổi trạng thái của nút "Start" và "Stop"
-                const stopButton = document.getElementById('stop-button');
-                stopButton.disabled = false;
-                const startButton = document.getElementById('start-button');
-                startButton.disabled = true;
-            })
-            .catch(err => {
-                console.error('Lỗi khi gửi dữ liệu xuống PLC:', err);
-                logMessage('Error starting system.', 1); // Log lỗi với màu đỏ
-            });            
+                // Tạo danh sách các tag và giá trị cần ghi xuống PLC
+                const tags = [
+                    'Total_Weight', 'Batch_ref', 'Cement_ref', 'Sand_ref',
+                    'Mineral_ref', 'Flyash_ref', 'PG01_ref', 'PG02_ref', 
+                    'PG03_ref', 'Start', 'Stop'
+                ];
+
+                const values = [
+                    total_weight, batch_ref, cement_ref, sand_ref,
+                    mineral_ref, flyash_ref, additive1_ref, additive2_ref,
+                    additive3_ref, true, false
+                ];
+
+                // Gửi toàn bộ dữ liệu xuống PLC thông qua API
+                fetch('/writeplcdata', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ tag: tags, value: values }) // Sử dụng tag và value
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`API trả về lỗi: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    logMessage("System started successfully."); // Log thông báo thành công
+
+                    // Thay đổi trạng thái của nút "Start" và "Stop"
+                    const stopButton = document.getElementById('stop-button');
+                    stopButton.disabled = false;
+
+                    const startButton = document.getElementById('start-button');
+                    startButton.disabled = true;
+                })
+                .catch(err => {
+                    console.error('Error while writing data:', err);
+                    logMessage('Error starting the system. Please check the configuration!', 1); // Log lỗi
+                });
+            } catch (err) {
+                console.error('Unexpected error in start function:', err);
+                logMessage('Unexpected error occurred while starting the system.', 1); // Log lỗi không mong muốn
+            }
         }
 
         function stop() {

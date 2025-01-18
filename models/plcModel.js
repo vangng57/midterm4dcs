@@ -3,16 +3,7 @@ const NodeS7 = require('nodes7');
 
 const conn = new NodeS7; // Khởi tạo client
 
-// Biến ánh xạ để đọc và ghi
-const variables_read = {
-    Cement_Value: 'DB2,REAL56', // Đọc mức xi măng
-    Sand_Value: 'DB2,REAL68',   // Đọc mức cát
-    Flyash_Value: 'DB2,REAL60', // Đọc mức tro bay
-    Mineral_Value: 'DB2,REAL64', // Đọc mức khoáng
-    PG01_Value: 'DB2,REAL72',   // Đọc mức PG1
-    PG02_Value: 'DB2,REAL76',   // Đọc mức PG2
-    PG03_Value: 'DB2,REAL80',   // Đọc mức PG3
-};
+
 
 const variables = {
     Cement_Value: 'DB2,REAL56', // Đọc mức xi măng
@@ -23,8 +14,8 @@ const variables = {
     Additive2_Value: 'DB2,REAL76',   // Đọc mức PG2
     Additive3_Value: 'DB2,REAL80',   // Đọc mức PG3
     Cement_Screw: 'DB1,X0.3', // Điều khiển vít xi măng
-    Flyash_Screw: 'DB1,X0.4',   // Điều khiển vít cát
-    Sand_Screw: 'DB1,X0.5', // Điều khiển vít tro bay
+    Flyash_Screw: 'DB1,X0.4',   // Điều khiển vít tro
+    Sand_Screw: 'DB1,X0.5', // Điều khiển vít cat
     Mineral_Screw: 'DB1,X0.6', // Điều khiển vít khoáng
     Mixer: 'DB1,X0.7',         // Điều khiển máy trộn
     Hopper_PG1: 'DB1,X0.0',    // Điều khiển van PG1
@@ -73,17 +64,11 @@ async function connectPLC() {
 
 // Đọc dữ liệu từ PLC
 function readPLCData(callback) {
-    const valuesArray = [];
     conn.readAllItems((error, values) => {
         if (error) {
             console.error("Lỗi khi đọc giá trị từ PLC:", error);
             callback(error, null);
         } else {
-            // for (let key in values) {
-            //     if (values.hasOwnProperty(key)) {
-            //         valuesArray.push(values[key]);
-            //     }
-            // }
             callback(null, values); // Trả về giá trị 
         }
     });
