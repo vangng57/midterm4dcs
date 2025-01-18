@@ -1,0 +1,463 @@
+/* Reset toàn bộ */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Ẩn phần dư nếu màn hình nhỏ */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Sidebar, Content Area, Main Area */
+    grid-template-rows: repeat(4, 1fr);     /* Phần trên và dưới */
+    height: 100vh;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-row: 1 / 4; /* Kéo dài qua các hàng */
+    grid-column: 1 / 2; /* Nằm ở cột đầu tiên */
+    background-color: #f7f8f3;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Căn dọc các nút */
+    justify-content: space-evenly; /* Trải đều các nút trong chiều cao */
+    align-items: stretch; /* Nút sẽ kéo dài theo chiều ngang */
+    height: 100%; /* Chiếm toàn bộ chiều cao */
+    box-sizing: border-box;
+}
+
+.sidebar-btn {
+    flex: 1; /* Mỗi nút chiếm không gian bằng nhau */
+    background-color: #78bcc4;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px; /* Kích thước chữ */
+    display: flex; /* Căn giữa nội dung */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin: 5px 0; /* Khoảng cách nhỏ giữa các nút */
+    box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng kích thước */
+}
+
+.sidebar-btn:hover {
+    background-color: #5a9ba9; /* Màu khi hover */
+}
+
+.image-container {
+    position: relative; /* Tạo không gian định vị cho các thành phần con */
+    width: 100%; /* Chiều rộng container sẽ thay đổi theo màn hình */
+    height: 100%; /* Chiều cao container sẽ thay đổi theo màn hình */
+    display: flex; /* Sử dụng Flexbox để căn giữa hình nền */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.background-image {
+    position: absolute;
+    max-width: 100%;   /* Đảm bảo không vượt quá chiều rộng khung cha */
+    max-height: 100%;  /* Đảm bảo không vượt quá chiều cao khung cha */
+    object-fit: contain; /* Giữ tỷ lệ gốc của hình ảnh */
+}
+
+.valve-image {
+    position: absolute; /* Vị trí tương đối so với .image-container */
+    width: 30px; /* Kích thước cố định của van */
+    height: auto; /* Giữ nguyên tỉ lệ gốc */
+    z-index: 2; /* Đặt trên hình nền */
+    transform: translate(-50%, -50%); /* Căn chỉnh tâm điểm van */
+}
+
+.motor-image {
+    position: absolute; /* Vị trí tương đối so với .image-container */
+    width: 50px; /* Kích thước cố định của van */
+    height: auto; /* Giữ nguyên tỉ lệ gốc */
+    z-index: 2; /* Đặt trên hình nền */
+    transform: translate(-50%, -50%); /* Căn chỉnh tâm điểm van */
+}
+
+.scale-value {
+    position: absolute;
+    background-color: hsla(182, 100%, 48%, 0.992);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Không cho phép tương tác */
+}
+
+/* Content Area */
+.content-area {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Main Area */
+.main-area {
+    grid-column: 5 / 13; /* Chiếm cột thứ 3 */
+    grid-row: 1 / 4;    /* Chỉ nằm ở hàng đầu tiên */
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Main Image in Main Area */
+.main-area img.main-image {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước vùng */
+    max-height: 100%; /* Tự động điều chỉnh chiều cao */
+    display: block; /* Đảm bảo ảnh là một block element */
+    margin: auto; /* Căn giữa theo cả chiều ngang và dọc */
+}
+
+.content-1 {
+    grid-column: 2 / 5;
+    grid-row: 1 / 4;
+}
+
+/* Content Area 2, 3, 4 */
+.content-2 {
+    grid-column: 1 / 4;
+    grid-row: 4 / 5;
+}
+
+.content-3 {
+    grid-column: 4 / 8;
+    grid-row: 4 / 5;
+}
+
+.content-4 {
+    grid-column: 8 / 13;
+    grid-row: 4 / 5;
+}
+
+.manual-header {
+    text-align: center; /* Căn giữa tiêu đề */
+    margin-bottom: 20px; /* Khoảng cách giữa tiêu đề và các nút */
+    font-size: 20px; /* Kích thước chữ lớn */
+    font-weight: bold; /* Đậm chữ */
+    width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng */
+}
+
+/* Grid layout for manual buttons */
+.manual-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cột */
+    gap: 10px;
+    justify-items: center; /* Căn giữa nút theo chiều ngang */
+}
+
+/* Buttons for Manual mode */
+.manual-btn {
+    width: 150px; /* Chiều rộng cố định */
+    height: 50px; /* Chiều cao cố định */
+    padding: 0; /* Loại bỏ padding mặc định */
+    background-color: #4caf50; /* Màu mặc định - chờ bật */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px; /* Kích thước chữ */
+    line-height: 50px; /* Căn chỉnh chữ theo chiều cao nút */
+    transition: background-color 0.3s ease;
+}
+
+/* Khi hover trên nút ở trạng thái chờ bật */
+.manual-btn:hover {
+    background-color: #45a049; /* Màu hover khi ở trạng thái chờ bật */
+}
+
+/* Trạng thái chờ tắt */
+.manual-btn.off {
+    background-color: #dc3545; /* Màu đỏ cho trạng thái chờ tắt */
+}
+
+/* Khi hover trên nút ở trạng thái chờ tắt */
+.manual-btn.off:hover {
+    background-color: #a71d2a; /* Màu đỏ đậm hơn khi hover */
+}
+
+/* Log Container */
+.log-container {
+    width: 100%;
+    height: 100%; /* Chiếm toàn bộ chiều cao của Content Area 2 */
+    overflow-y: auto; /* Hiển thị thanh cuộn nếu nội dung vượt quá chiều cao */
+    background-color: #e8e8e8; /* Màu nền nhạt cho log */
+    border: 1px solid #ccc; /* Viền mỏng */
+    border-radius: 5px; /* Bo góc */
+    padding: 10px;
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước container */
+    font-family: monospace; /* Font chữ cho log */
+    font-size: 12px; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+}
+
+#content-4 {
+    display: flex;
+    justify-content: space-between; /* Căn giữa các cột */
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Đảm bảo khung chiếm toàn bộ chiều cao */
+    overflow: hidden; /* Ẩn phần nội dung vượt quá */
+    padding: 10px; /* Khoảng cách bên trong khung */
+    box-sizing: border-box;
+}
+
+/* Recipe Container */
+.recipe-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; /* Chia đều khoảng cách giữa các cột */
+    align-items: stretch; /* Đảm bảo các cột cùng chiều cao */
+    width: 100%;
+    height: 100%; /* Chiếm toàn bộ chiều cao của content-4 */
+    gap: 20px; /* Khoảng cách giữa các cột */
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: #f0f8ff; /* Màu nền nhạt */
+    border: 1px solid #ccc; /* Viền nhẹ */
+    border-radius: 10px;
+    overflow: hidden; /* Ẩn nội dung tràn */
+}
+
+/* Recipe Column */
+.recipe-column {
+    display: flex;
+    flex-direction: row; /* Đặt các thành phần trong cột thành hàng ngang */
+    justify-content: flex-start;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ẩn nội dung tràn */
+}
+
+.recipe-header {
+    /*writing-mode: vertical-rl; /* Xoay chữ theo chiều dọc */
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f7dc6f; /* Màu nền tiêu đề */
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    height: 100%; 
+    align-items: center; /* Căn giữa chữ theo chiều dọc */
+    justify-content: center; /* Căn giữa chữ theo chiều ngang */
+}
+
+/* Recipe Table */
+.recipe-column table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.recipe-column table tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.recipe-column table td {
+    padding: 5px;
+    text-align: left;
+    font-size: 11px;
+    color: #333;
+}
+
+.recipe-column table td:nth-child(2) {
+    text-align: right; /* Căn phải cho các giá trị */
+    font-weight: bold;
+}
+
+/* Header in Recipe Column */
+.recipe-column h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    background-color: #f7dc6f; /* Màu nền header */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.trend-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    height: 40%;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.recipe-btn {
+    padding: 15px;
+    background-color: #f7dc6f;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.recipe-btn:hover {
+    background-color: #f0c674;
+}
+
+/* Form thêm công thức */
+.recipe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Đảm bảo form chiếm toàn bộ chiều rộng của content1 */
+    max-width: calc(100% - 10px); /* Đặt giới hạn chiều rộng tối đa, trừ padding */
+    height: auto; /* Đặt chiều cao tự động */
+    margin: 0 auto; /* Căn giữa ngang */
+    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+}
+
+.recipe-form h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recipe-form label {
+    font-size: 10px;
+    font-weight: bold;
+    color: #555;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.recipe-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.recipe-form button {
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.recipe-form button:hover {
+    background-color: #45a049;
+}
+
+.recipe-form .input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.recipe-form .input-group label {
+    flex: 1;
+    margin: 0;
+}
+
+.recipe-form .input-group input {
+    flex: 2;
+}
+
+/* Popup */
+.popup {
+    position: fixed; /* Đặt vị trí cố định */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Chiếm toàn bộ chiều rộng màn hình */
+    height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền tối mờ */
+    display: none; /* Ẩn mặc định */
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    z-index: 1000; /* Hiển thị trên cùng */
+}
+
+/* Nội dung popup */
+.popup-content {
+    background: #fff; /* Màu nền trắng */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 300px; /* Chiều rộng cố định */
+}
+
+/* Nút trong popup */
+.popup-buttons {
+    margin-top: 20px;
+}
+
+.popup-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.popup-btn:hover {
+    background-color: #0056b3;
+}
+
+#cancel-delete {
+    background-color: #dc3545;
+}
+
+#cancel-delete:hover {
+    background-color: #a71d2a;
+}
