@@ -689,6 +689,7 @@
         function reset() {
             // Thực hiện các thao tác reset hệ thống ở đây
             logMessage("System reset.");
+            writeplcdata(["Reset","Stop","Start","Auto","Manual"],[true,false,false,false,false]);
         }
 
         function getCurrentTime() {
