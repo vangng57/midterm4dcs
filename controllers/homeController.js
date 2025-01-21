@@ -29,7 +29,6 @@ module.exports = {
     },
 
     // ghi log xuống database
-    // ghi log xuống database
     addLog: (req, res) => {
         const { timestamp, message_text } = req.body; // Lấy dữ liệu từ request body
     
@@ -50,7 +49,7 @@ module.exports = {
             res.status(201).json({ message: 'Thêm log thành công!', id: this.lastID });
         });
     },
-
+    
     addRecipe: (req, res) => {
         const {
             name, cement, sand, mineral, flyash,

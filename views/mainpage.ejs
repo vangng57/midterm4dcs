@@ -14,7 +14,6 @@
             <button class="sidebar-btn" onclick="automode()">Auto</button>
             <button class="sidebar-btn" onclick="showManual()">Manual</button>
             <button class="sidebar-btn" onclick="showTrend()">Trend</button>
-            <button class="sidebar-btn">Set weight</button>
             <button class="sidebar-btn" onclick="showRecipeList()">Recipe</button>
             <button class="sidebar-btn" id="start-button" onclick="start()" disabled>Start</button>
             <button class="sidebar-btn" id="reset-button" onclick="reset()" disabled>Reset</button>
@@ -37,9 +36,9 @@
                 <img src="/images/all.png" alt="Background Image" class="background-image">
             
                 <!-- Hình van -->
-                <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 44.2%;">
+                <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 45%;">
                 <div id="valve_1_status" class="status-circle" style="top: 49%; left: 40%;"></div>
-                <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 52%;">
+                <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 55%;">
                 <div id="valve_2_status" class="status-circle" style="top: 49%; left: 48%;"></div>
                 <img src="/images/valve.png" alt="Valve" class="valve-image" style="top: 51%; left: 22.6%;">
                 <div id="valve_3_status" class="status-circle" style="top: 49%; left: 18%;"></div>
@@ -792,7 +791,7 @@
                     fullFlyashData.shift();
                 }
                 // Cập nhật biểu đồ
-                updateCharts();
+                //updateCharts();
             })
             .catch(err => console.error('Lỗi khi gọi API đọc PLC:', err));
         }
