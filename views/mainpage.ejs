@@ -18,7 +18,7 @@
             <button class="sidebar-btn" onclick="showRecipeList()">Recipe</button>
             <button class="sidebar-btn" id="start-button" onclick="start()" disabled>Start</button>
             <button class="sidebar-btn" id="reset-button" onclick="reset()" disabled>Reset</button>
-            <button class="sidebar-btn" id="stop-button" onclick="stop()" disabled>Estop</button>
+            <button class="sidebar-btn" id="stop-button" onclick="estop() " disabled >Estop</button>
             <button onclick="location.href='/';" class="sidebar-btn">Back</button>
         </div> 
 
@@ -108,13 +108,13 @@
                             <span id="current-recipe-id">0</span>
                         </div>
                         <table>
-                            <tr><td>Xi măng</td><td id="current-cement">0.0</td></tr>
-                            <tr><td>Cát</td><td id="current-sand">0.0</td></tr>
-                            <tr><td>Khoáng</td><td id="current-mineral">0.0</td></tr>
-                            <tr><td>Tro bay</td><td id="current-flyash">0.0</td></tr>
-                            <tr><td>Phụ gia 1</td><td id="current-additive1">0.0</td></tr>
-                            <tr><td>Phụ gia 2</td><td id="current-additive2">0.0</td></tr>
-                            <tr><td>Phụ gia 3</td><td id="current-additive3">0.0</td></tr>
+                            <tr><td>Xi măng (kg)</td><td id="current-cement">0.000</td></tr>
+                            <tr><td>Cát (kg)</td><td id="current-sand">0.000</td></tr>
+                            <tr><td>Khoáng (kg)</td><td id="current-mineral">0.000</td></tr>
+                            <tr><td>Tro bay (kg)</td><td id="current-flyash">0.000</td></tr>
+                            <tr><td>Phụ gia 1 (kg)</td><td id="current-additive1">0.000</td></tr>
+                            <tr><td>Phụ gia 2 (kg)</td><td id="current-additive2">0.000</td></tr>
+                            <tr><td>Phụ gia 3 (kg)</td><td id="current-additive3">0.000</td></tr>
                         </table>
                     </div>
             
@@ -124,13 +124,13 @@
                             <h4>GIÁ TRỊ THỰC TẾ:</h4>
                         </div>
                         <table>
-                            <tr><td>Xi măng</td><td id="actual-cement">0.0</td></tr>
-                            <tr><td>Cát</td><td id="actual-sand">0.0</td></tr>
-                            <tr><td>Khoáng</td><td id="actual-mineral">0.0</td></tr>
-                            <tr><td>Tro bay</td><td id="actual-flyash">0.0</td></tr>
-                            <tr><td>Phụ gia 1</td><td id="actual-additive1">0.0</td></tr>
-                            <tr><td>Phụ gia 2</td><td id="actual-additive2">0.0</td></tr>
-                            <tr><td>Phụ gia 3</td><td id="actual-additive3">0.0</td></tr>
+                            <tr><td>Xi măng (kg)</td><td id="actual-cement">0.000</td></tr>
+                            <tr><td>Cát (kg)</td><td id="actual-sand">0.000</td></tr>
+                            <tr><td>Khoáng (kg)</td><td id="actual-mineral">0.000</td></tr>
+                            <tr><td>Tro bay (kg)</td><td id="actual-flyash">0.000</td></tr>
+                            <tr><td>Phụ gia 1 (kg)</td><td id="actual-additive1">0.000</td></tr>
+                            <tr><td>Phụ gia 2 (kg)</td><td id="actual-additive2">0.000</td></tr>
+                            <tr><td>Phụ gia 3 (kg)</td><td id="actual-additive3">0.000</td></tr>
                         </table>
                     </div>
                 </div>
@@ -156,6 +156,7 @@
             writeplcdata(["Auto","Manual"],[true,false]);
         }
 
+        
         function showTrend() {
             const content1 = document.getElementById("content-1");
             content1.innerHTML = `
@@ -172,10 +173,31 @@
                 data: {
                     labels: ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25'],
                     datasets: [{
-                        label: 'Cement Screw Speed (rpm)',
+                        label: 'Cement',
                         data: [100, 105, 98, 110, 115, 120],
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Sand',
+                        data: [90, 95, 88, 100, 105, 110],
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Fly ash',
+                        data: [80, 85, 78, 90, 95, 100],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Mineral',
+                        data: [70, 75, 68, 80, 85, 90],
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
                         tension: 0.4
                     }]
                 },
@@ -199,21 +221,21 @@
                 data: {
                     labels: ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25'],
                     datasets: [{
-                        label: 'Cement (kg)',
+                        label: 'Additive 1 (kg)',
                         data: [500, 520, 510, 530, 540, 550],
                         borderColor: 'rgba(255, 99, 132, 1)',
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         tension: 0.4
                     },
                     {
-                        label: 'Sand (kg)',
+                        label: 'Additive 2 (kg)',
                         data: [300, 310, 320, 300, 290, 280],
                         borderColor: 'rgba(54, 162, 235, 1)',
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         tension: 0.4
                     },
                     {
-                        label: 'flyash (kg)',
+                        label: 'Additive 3 (kg)',
                         data: [400, 380, 350, 410, 420, 390],
                         borderColor: 'rgba(255, 206, 86, 1)',
                         backgroundColor: 'rgba(255, 206, 86, 0.2)',
@@ -224,7 +246,21 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true, position: 'top' }
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                mode: 'x', // Chỉ kéo theo trục x
+                            },
+                            zoom: {
+                                wheel: {
+                                    enabled: true, // Thu phóng bằng con lăn chuột
+                                },
+                                pinch: {
+                                    enabled: true // Thu phóng bằng cảm ứng
+                                },
+                                mode: 'x', // Chỉ thu phóng theo trục x
+                            },
+                        }
                     },
                     scales: {
                         x: { beginAtZero: true },
@@ -254,10 +290,10 @@
                 { name: "PG Scale Valve", tag: "PG_Scale_Valve", id: "valve_3_status" },
                 { name: "Sand Scale Valve", tag: "Sand_Scale_Valve", id: "valve_1_status" },
                 { name: "Mineral Ash Valve", tag: "Mineral_Ash_Valve", id: "valve_2_status" },
-                { name: "Mixer Valve Open", tag: "Mixer_Valve_Open", id: "valve_7_status" },
-                { name: "Mixer Valve Close", tag: "Mixer_Valve_Close" },
-                { name: "Sand Valve Vibrator", tag: "Sand_Valve_Vibrator" },
-                { name: "PG Ash Valve Vibrator", tag: "PG_Ash_Valve_Vibrator" }
+                { name: "Mixer Valve Open", tag: "Mixer_Valve_Open", id: "valve_7_status" }
+                //{ name: "Mixer Valve Close", tag: "Mixer_Valve_Close" },
+                //{ name: "Sand Valve Vibrator", tag: "Sand_Valve_Vibrator" },
+                //{ name: "PG Ash Valve Vibrator", tag: "PG_Ash_Valve_Vibrator" }
             ];
 
             // Tạo HTML cho các nút
@@ -267,29 +303,36 @@
                         <button 
                             class="manual-btn on" 
                             data-tag="${task.tag}" 
-                            onclick="handleManualButtonClick('${task.tag}', this)">
+                            onclick="handleManualButtonClick('${task.tag}', this, '${task.id}')">
                             ${task.name}
                         </button>
                     `).join("")}
                 </div>
             `;
         }
-
-        function handleManualButtonClick(tag, button) {
+        function handleManualButtonClick(tag, button, id) {
             // Kiểm tra trạng thái hiện tại của nút
             const isOn = button.classList.contains('on'); // Kiểm tra xem nút có lớp 'on' hay không 
-
+            const color = document.getElementById(id);
+            if (!color) {
+                console.error(`Element with ID "${id}" not found.`);
+                return;
+            }
+            
             // Cập nhật giao diện nút
             if (isOn) {
                 writeplcdata(tag, true);
+                // Cập nhật trạng thái của nút
+                color.style.backgroundColor = '#4dbf5f';
                 button.classList.remove('on');
                 button.classList.add('off');
-                logMessage(`${tag} turned OFF.`);
+                logMessage(`${tag} turned ON.`);
             } else {
                 writeplcdata(tag, false);
+                color.style.backgroundColor = "red";
                 button.classList.remove('off');
                 button.classList.add('on');
-                logMessage(`${tag} turned ON.`);
+                logMessage(`${tag} turned OFF.`);
             }
         }
 
@@ -380,10 +423,9 @@
                                 <input type="number" id="additive3" value="${recipe.additive3}" min="0" required>
                             </div>
                             <div class"manual-grid">
-                                <button type="button" onclick="saveRecipe(${recipe.recipe-name})">Update</button>
+                                <button type="button" onclick="applyRecipe()">Apply</button>
                                 <button type="button" onclick="deleteRecipeConfirmation('${recipe.name}')">Delete</button>
                                 <button type="button" onclick="showRecipeList()">Back</button>
-                                <button type="button" onclick="applyRecipe()">Apply</button>
                             </div>
                         </div>
                     `;
@@ -406,7 +448,7 @@
                     </div>
                     <div class="input-group">
                         <label for="total_weight">Total weight:</label>
-                        <input type="number" id="total_weight" placeholder="Enter the total weight" min="0" required>
+                        <input type="number" id="total_weight" placeholder="Enter the total weight (kg)" min="0" required>
                     </div>
                     <div class="input-group">
                         <label for="cement">Xi măng (%):</label>
@@ -516,27 +558,28 @@
 
         function applyRecipe() {
             // Lấy giá trị từ các trường nhập liệu
-            const total_weight = document.getElementById('total_weight').value || "0.0";
-            const cement = document.getElementById('cement').value * total_weight /100 || "0.0";
-            const sand = document.getElementById('sand').value * total_weight /100 || "0.0";
-            const mineral = document.getElementById('mineral').value* total_weight /100 || "0.0";
-            const flyash = document.getElementById('flyash').value* total_weight /100 || "0.0";
-            const additive1 = document.getElementById('additive1').value || "0.0";
-            const additive2 = document.getElementById('additive2').value || "0.0";
-            const additive3 = document.getElementById('additive3').value || "0.0";
+            const total_weight = document.getElementById('total_weight').value || "0.000";
+            const cement = document.getElementById('cement').value * total_weight /100 || "0.000";
+            const sand = document.getElementById('sand').value * total_weight /100 || "0.000";
+            const mineral = document.getElementById('mineral').value* total_weight /100 || "0.000";
+            const flyash = document.getElementById('flyash').value* total_weight /100 || "0.000";
+            const additive1 = document.getElementById('additive1').value || "0.000";
+            const additive2 = document.getElementById('additive2').value || "0.000";
+            const additive3 = document.getElementById('additive3').value || "0.000";
 
             // Cập nhật bảng "Công thức hiện tại"
-            document.getElementById('current-cement').textContent = parseFloat(cement).toFixed(1);
-            document.getElementById('current-sand').textContent = parseFloat(sand).toFixed(1);
-            document.getElementById('current-mineral').textContent = parseFloat(mineral).toFixed(1);
-            document.getElementById('current-flyash').textContent = parseFloat(flyash).toFixed(1);
-            document.getElementById('current-additive1').textContent = parseFloat(additive1).toFixed(1);
-            document.getElementById('current-additive2').textContent = parseFloat(additive2).toFixed(1);
-            document.getElementById('current-additive3').textContent = parseFloat(additive3).toFixed(1);
+            document.getElementById('current-cement').textContent = parseFloat(cement).toFixed(3);
+            document.getElementById('current-sand').textContent = parseFloat(sand).toFixed(3);
+            document.getElementById('current-mineral').textContent = parseFloat(mineral).toFixed(3);
+            document.getElementById('current-flyash').textContent = parseFloat(flyash).toFixed(3);
+            document.getElementById('current-additive1').textContent = parseFloat(additive1).toFixed(3);
+            document.getElementById('current-additive2').textContent = parseFloat(additive2).toFixed(3);
+            document.getElementById('current-additive3').textContent = parseFloat(additive3).toFixed(3);
 
             const startButton = document.getElementById('start-button');
             startButton.disabled = false;
-
+            const resetButton = document.getElementById('reset-button');
+            resetButton.disabled = false;
             // Thông báo cập nhật thành công
             logMessage("Recipe values applied successfully!");
         }
@@ -557,68 +600,205 @@
                 console.error('Error while writting data:', err);
             });
         }
-        function updateColer(circle_status){
-            for (id in circle_status){
-                const valveElement = document.getElementById('valve_' + (parseInt(id) + 1) + '_status');
-                if (status == true){
-                    valveElement.style.backgroundColor = 'green';                
-                } else {
-                    valveElement.style.backgroundColor = 'red';
-                }
+        
+        const MAX_HISTORY_POINTS = 5 * 3600;
+        let fullLabels = []; // Lưu toàn bộ nhãn thời gian
+        let fullCementData = []; // Lưu toàn bộ dữ liệu xi măng
+        let fullSandData = []; // Lưu toàn bộ dữ liệu cát
+        let fullMineralData = []; // Lưu toàn bộ dữ liệu khoáng
+        let fullFlyashData = []; // Lưu toàn bộ dữ liệu tro bay
+        let fullAdditive1Data = []; // Lưu toàn bộ dữ liệu phụ gia 1
+        let fullAdditive2Data = []; // Lưu toàn bộ dữ liệu phụ gia 2
+        let fullAdditive3Data = []; // Lưu toàn bộ dữ liệu phụ gia 3
+        // Hàm cập nhật biểu đồ
+        function updateCharts() {
+            // Biểu đồ 1: Xi măng, Cát, Khoáng, Tro bay
+            if (!window.materialChart) {
+                const ctx1 = document.getElementById('trendChart1').getContext('2d');
+                window.materialChart = new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: fullLabels, // Thời gian
+                        datasets: [
+                            {
+                                label: 'Cement (kg)',
+                                data: fullCementData,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                tension: 0.4,
+                            },
+                            {
+                                label: 'Sand (kg)',
+                                data: fullSandData,
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                tension: 0.4,
+                            },
+                            {
+                                label: 'Mineral (kg)',
+                                data: fullMineralData,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                tension: 0.4,
+                            },
+                            {
+                                label: 'Flyash (kg)',
+                                data: fullFlyashData,
+                                borderColor: 'rgba(255, 206, 86, 1)',
+                                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                                tension: 0.4,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            zoom: {
+                                pan: { enabled: true, mode: 'x' },
+                                zoom: {
+                                    wheel: { enabled: true },
+                                    pinch: { enabled: true },
+                                    mode: 'x',
+                                },
+                            },
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Time' },
+                            },
+                            y: {
+                                title: { display: true, text: 'Material (kg)' },
+                            },
+                        },
+                    },
+                });
+            } else {
+                // Cập nhật dữ liệu nếu biểu đồ đã được khởi tạo
+                window.materialChart.data.labels = fullLabels;
+                window.materialChart.data.datasets[0].data = fullCementData;
+                window.materialChart.data.datasets[1].data = fullSandData;
+                window.materialChart.data.datasets[2].data = fullMineralData;
+                window.materialChart.data.datasets[3].data = fullFlyashData;
+                window.materialChart.update();
             }
-            
+
+            // Biểu đồ 2: 3 Phụ gia
+            if (!window.additiveChart) {
+                const ctx2 = document.getElementById('trendChart2').getContext('2d');
+                window.additiveChart = new Chart(ctx2, {
+                    type: 'line',
+                    data: {
+                        labels: fullLabels, // Thời gian
+                        datasets: [
+                            {
+                                label: 'Additive 1 (kg)',
+                                data: fullAdditive1Data,
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                tension: 0.4,
+                            },
+                            {
+                                label: 'Additive 2 (kg)',
+                                data: fullAdditive2Data,
+                                borderColor: 'rgba(255, 159, 64, 1)',
+                                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                                tension: 0.4,
+                            },
+                            {
+                                label: 'Additive 3 (kg)',
+                                data: fullAdditive3Data,
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                tension: 0.4,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            zoom: {
+                                pan: { enabled: true, mode: 'x' },
+                                zoom: {
+                                    wheel: { enabled: true },
+                                    pinch: { enabled: true },
+                                    mode: 'x',
+                                },
+                            },
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: 'Time' },
+                            },
+                            y: {
+                                title: { display: true, text: 'Additives (kg)' },
+                            },
+                        },
+                    },
+                });
+            } else {
+                // Cập nhật dữ liệu nếu biểu đồ đã được khởi tạo
+                window.additiveChart.data.labels = fullLabels;
+                window.additiveChart.data.datasets[0].data = fullAdditive1Data;
+                window.additiveChart.data.datasets[1].data = fullAdditive2Data;
+                window.additiveChart.data.datasets[2].data = fullAdditive3Data;
+                window.additiveChart.update();
+            }
         }
         function updateActualValues() {
-            // Các tag cần đọc
-            const tags = {
-                cement: "Cement_Value",
-                sand: "Sand_Value",
-                mineral: "Mineral_Value",
-                flyash: "Flyash_Value",
-                additive1: "Additive1_Value",
-                additive2: "Additive2_Value",
-                additive3: "Additive3_Value"
-            };
             fetch('/readplcdata', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(response => response.json())
             .then(data => {
-                if (data.values !== undefined) {
-                    // Cập nhật giá trị vào bảng "Giá trị thực tế"
-                    const cell_sand = document.getElementById("actual-sand");
-                    cell_sand.textContent = parseFloat(data.values["Sand_Value"]).toFixed(1);
-                    const cell_cement = document.getElementById("actual-cement");
-                    cell_cement.textContent = parseFloat(data.values["Cement_Value"]).toFixed(1);
-                    const cell_mineral = document.getElementById("actual-mineral");
-                    cell_mineral.textContent = parseFloat(data.values["Mineral_Value"]).toFixed(1);
-                    const cell_flyash = document.getElementById("actual-flyash");
-                    cell_flyash.textContent = parseFloat(data.values["Flyash_Value"]).toFixed(1);
-                    const cell_additive1 = document.getElementById("actual-additive1");
-                    cell_additive1.textContent = parseFloat(data.values["Additive1_Value"]).toFixed(1);
-                    const cell_additive2 = document.getElementById("actual-additive2");
-                    cell_additive2.textContent = parseFloat(data.values["Additive2_Value"]).toFixed(1);
-                    const cell_additive3 = document.getElementById("actual-additive3");
-                    cell_additive3.textContent = parseFloat(data.values["Additive3_Value"]).toFixed(1);
+                // Cập nhật giá trị thực tế vào bảng
+                const cementValue = data.values?.Cement_Value || 0;
+                document.getElementById('actual-cement').textContent = parseFloat(cementValue).toFixed(3);
+                fullCementData.push(cementValue);
+                const sandValue = data.values?.Sand_Value || 0;
+                document.getElementById('actual-sand').textContent = parseFloat(sandValue).toFixed(3);
+                fullSandData.push(sandValue);
+                const mineralValue = data.values?.Mineral_Value || 0;
+                document.getElementById('actual-mineral').textContent = parseFloat(mineralValue).toFixed(3);
+                fullMineralData.push(mineralValue);
+                const flyashValue = data.values?.Flyash_Value || 0;
+                document.getElementById('actual-flyash').textContent = parseFloat(flyashValue).toFixed(3);
+                fullFlyashData.push(flyashValue);
+                const additive1Value = data.values?.Additive1_Value || 0;    
+                document.getElementById('actual-additive1').textContent = parseFloat(additive1Value).toFixed(3);
+                fullAdditive1Data.push(additive1Value);
+                const additive2Value = data.values?.Additive2_Value || 0;
+                document.getElementById('actual-additive2').textContent = parseFloat(additive2Value).toFixed(3);
+                fullAdditive2Data.push(additive2Value);
+                const additive3Value = data.values?.Additive3_Value || 0;
+                document.getElementById('actual-additive3').textContent = parseFloat(additive3Value).toFixed(3);
+                fullAdditive3Data.push(additive3Value);
+                fullLabels.push(getCurrentTime());
 
-                    const circle_status = [
-                        valve_1_status = data.values["Sand_Scale_Valve"], valve_2_status = data.values["Mineral_Ash_Valve"], valve_3_status = data.values["PG_Scale_Valve"],
-                        valve_4_status = data.values["Hopper_PG3"], valve_5_status = data.values["Hopper_PG2"], valve_6_status = data.values["Hopper_PG1"],
-                        valve_7_status = data.values["Mixer_Valve_Open"], valve_8_status = data.values["Cement_Screw"], valve_9_status = data.values["Sand_Screw"],
-                        valve_10_status = data.values["Mixer"], valve_11_status = data.values["Conveyor_Chute"], valve_12_status = data.values["Mineral_Screw"],
-                        valve_13_status = data.values["Flyash_Screw"]
-                    ]
-                    updateColer(circle_status);
-                } else {
-                    console.error(`Lỗi khi đọc giá trị từ PLC: `, data.error);
+                // const circle_status = [
+                //         valve_1_status = data.values["Sand_Scale_Valve"], valve_2_status = data.values["Mineral_Ash_Valve"], valve_3_status = data.values["PG_Scale_Valve"],
+                //         valve_4_status = data.values["Hopper_PG3"], valve_5_status = data.values["Hopper_PG2"], valve_6_status = data.values["Hopper_PG1"],
+                //         valve_7_status = data.values["Mixer_Valve_Open"], valve_8_status = data.values["Cement_Screw"], valve_9_status = data.values["Sand_Screw"],
+                //         valve_10_status = data.values["Mixer"], valve_11_status = data.values["Conveyor_Chute"], valve_12_status = data.values["Mineral_Screw"],
+                //         valve_13_status = data.values["Flyash_Screw"]
+                //     ]
+                // Kiểm tra và loại bỏ các điểm dữ liệu cũ nếu cần
+                if (fullLabels.length > MAX_HISTORY_POINTS) {
+                    fullLabels.shift();
+                    fullCementData.shift();
+                    fullSandData.shift();
+                    fullFlyashData.shift();
                 }
+                // Cập nhật biểu đồ
+                updateCharts();
             })
             .catch(err => console.error('Lỗi khi gọi API đọc PLC:', err));
         }
 
         // Gọi hàm mỗi giây để cập nhật bảng
-        setInterval(updateActualValues, 1000);
+        setInterval(updateActualValues, 5000);
 
         function start() {
             try {
@@ -637,7 +817,7 @@
                 const tags = [
                     'Total_Weight', 'Batch_ref', 'Cement_ref', 'Sand_ref',
                     'Mineral_ref', 'Flyash_ref', 'PG01_ref', 'PG02_ref', 
-                    'PG03_ref', 'Start', 'Stop'
+                    'PG03_ref', 'Start', 'estop'
                 ];
 
                 const values = [
@@ -661,12 +841,13 @@
                 .then(data => {
                     logMessage("System started successfully."); // Log thông báo thành công
 
-                    // Thay đổi trạng thái của nút "Start" và "Stop"
+                    // Thay đổi trạng thái của nút "Start" và "eStop"
                     const stopButton = document.getElementById('stop-button');
                     stopButton.disabled = false;
-
+                    //stopButton.style.zIndex = 1;
                     const startButton = document.getElementById('start-button');
                     startButton.disabled = true;
+                    //startButton.style.zIndex = 0;
                 })
                 .catch(err => {
                     console.error('Error while writing data:', err);
@@ -678,18 +859,26 @@
             }
         }
 
-        function stop() {
+        function estop() {
             // Thực hiện các thao tác dừng hệ thống ở đây
-            writeplcdata('Stop', true);
+            writeplcdata(['estop','Start'], [true,false]);
             const stopButton = document.getElementById('stop-button');
             stoptButton.disabled = true;
+            const startButton = document.getElementById('start-button');
+            startButton.disabled = false;
             logMessage("System stopped.");
         }
 
         function reset() {
             // Thực hiện các thao tác reset hệ thống ở đây
             logMessage("System reset.");
-            writeplcdata(["Reset","Stop","Start","Auto","Manual"],[true,false,false,false,false]);
+            writeplcdata(["Reset","estop","Start","Auto","Manual"],[true,false,false,false,false]);
+            const stopButton = document.getElementById('stop-button');
+            stopButton.disabled = true;
+            const startButton = document.getElementById('start-button');
+            startButton.disabled = true;
+            const resetButton = document.getElementById('reset-button');
+            resetButton.disabled = true;
         }
 
         function getCurrentTime() {
@@ -718,6 +907,22 @@
 
             // Tự động cuộn xuống cuối khung log
             logContainer.scrollTop = logContainer.scrollHeight;
+
+            fetch('/addLog', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    timestamp: timestamp, // Gửi timestamp đầy đủ
+                    message_text: message 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Log saved successfully:', data.message);
+            })
+            .catch(err => {
+                console.error('Error saving log to database:', err);
+            });
         }
     </script>
 </body>

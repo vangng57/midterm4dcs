@@ -41,7 +41,7 @@ const variables = {
     Start: 'M0.1',
     Manual: 'M0.0',
     Auto: 'M0.5',
-    Stop: 'M0.3',
+    estop: 'M0.3',
     Reset: 'M51.4'
 };
 
